@@ -1,6 +1,6 @@
 <?php
 
-namespace Exula\LaravelFilesystem\Ceph;
+namespace Exula\Ceph;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
@@ -22,13 +22,7 @@ class CephStorageServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        Storage::extend('ceph', function ($app, $config) {
-            $config['endpoint'] = isset($config['base_url']) ? $config['base_url'] : self::CEPH_BASE_URL;
-            $config['use_path_style_endpoint'] = true;
-            $client = new S3Client($config);
 
-            return new Filesystem(new AwsS3Adapter($client, $config['bucket']));
-        });
     }
 
     /**
@@ -39,6 +33,13 @@ class CephStorageServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        Storage::extend('ceph', function ($app, $config) {
+            $config['endpoint'] = isset($config['base_url']) ? $config['base_url'] : self::CEPH_BASE_URL;
+            $config['use_path_style_endpoint'] = true;
+            $client = new S3Client($config);
+
+            return new Filesystem(new AwsS3Adapter($client, $config['bucket']));
+        });
     }
 }
 

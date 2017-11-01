@@ -14,13 +14,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Exula\\LaravelFilesystem\\Ceph\\": "src/"
+            "Exula\\Ceph\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Exula\\LaravelFilesystem\\Ceph\\CephStorageServiceProvider"
+                "Exula\\Ceph\\CephStorageServiceProvider"
             ]
         }
     }
