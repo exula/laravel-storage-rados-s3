@@ -8,6 +8,8 @@
             "email": "brad@exula.net"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.0.0",
         "league/flysystem-aws-s3-v3": "1.*"
