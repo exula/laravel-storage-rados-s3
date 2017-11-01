@@ -1,6 +1,6 @@
 {
     "name": "exula/laravel-storage-rados-s3",
-    "description": "\"Extends League Flysystem S3 Adapter to easily point it to a Rados Gateway\"",
+    "description": "Extends League Flysystem S3 Adapter to easily point it to a Rados Gateway",
     "license": "MIT",
     "authors": [
         {
@@ -8,15 +8,13 @@
             "email": "brad@exula.net"
         }
     ],
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "require": {
         "php": ">=7.0.0",
         "league/flysystem-aws-s3-v3": "1.*"
     },
     "autoload": {
         "psr-4": {
-            "Exula\\LaravelFilesystem\\Ceph\\": "src"
+            "Exula\\LaravelFilesystem\\Ceph\\": "src/"
         }
     },
     "laravel": {
