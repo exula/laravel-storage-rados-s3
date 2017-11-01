@@ -17,9 +17,11 @@
             "Exula\\LaravelFilesystem\\Ceph\\": "src/"
         }
     },
-    "laravel": {
-        "providers": [
-            "Exula\\LaravelFilesystem\\Ceph\\CephStorageServiceProvider"
-        ]
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Exula\\LaravelFilesystem\\Ceph\\CephStorageServiceProvider"
+            ]
+        }
     }
 }
