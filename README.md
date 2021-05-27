@@ -35,7 +35,9 @@ Add a new disk to your `config/filesystems.php` config:
                 ],
             'region' => '',
             'bucket' => env('CEPH_BUCKET', 'test'),
-            'version' => 'latest'
+            'version' => env('CEPH_VERSION', 'latest'),
+            'ACL' => env('CEPH_ACL', 'private'), //private,'public-read',
+            'visibility' => env('CEPH_VISIBILITY', 'private')
         ],
 ```
 
@@ -46,6 +48,9 @@ CEPH_BASE_URL=
 CEPH_ACCESS_KEY=
 CEPH_SECRET_KEY=
 CEPH_BUCKET=
+CEPH_VERSION=
+CEPH_ACL=
+CEPH_VISIBILITY=
 
 ```
 
