@@ -14,7 +14,7 @@ class CephStorageServiceProvider extends ServiceProvider
 {
     const CEPH_BASE_URL = 'https://s3.aws.com';
     const CEPH_VISIBILITY = 'private';
-    const CEPH_PREFIX = 'panther';
+    const CEPH_PREFIX = '';
     const CEPH_DEBUG = false;
     const CEPH_ACL = 'private';
 
