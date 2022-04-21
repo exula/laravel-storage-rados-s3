@@ -5,8 +5,9 @@ namespace Exula\Ceph;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Aws\S3\S3Client;
-use League\Flysystem\AwsS3v3\AwsS3Adapter;
+use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
 use League\Flysystem\Filesystem;
+use Illuminate\Filesystem\AwsS3V3Adapter as FilesystemAdapter;
 
 
 
@@ -42,10 +43,10 @@ class CephStorageServiceProvider extends ServiceProvider
             $config['endpoint'] = isset($config['base_url']) ? $config['base_url'] : self::CEPH_BASE_URL;
 
             $config['use_path_style_endpoint'] = true;
-            
+
 
             $config['debug'] = isset($config['debug']) ? $config['debug'] : self::CEPH_DEBUG;;
-            
+
             $prefix =  isset($config['prefix']) ? $config['prefix'] : self::CEPH_PREFIX;
 
             $options = [];
@@ -55,9 +56,31 @@ class CephStorageServiceProvider extends ServiceProvider
             $client = new S3Client($config);
 
 
+            if($options['visibility'] === 'public') {
+                $visibility = new \League\Flysystem\AwsS3V3\PortableVisibilityConverter(
+                // Optional default for directories
+                    \League\Flysystem\Visibility::PUBLIC
+                );
+            } else {
+                $visibility = new \League\Flysystem\AwsS3V3\PortableVisibilityConverter(
+                // Optional default for directories
+                    \League\Flysystem\Visibility::PRIVATE
+                );
+            }
+
             $options['ACL'] =  isset($config['ACL']) ? $config['ACL'] : self::CEPH_ACL;
 
-            return new Filesystem(new AwsS3Adapter($client, $config['bucket'] , $prefix, $options ) );
+
+            $adapter =  new AwsS3V3Adapter($client, $config['bucket'] , $prefix, $visibility );
+
+
+            return new FilesystemAdapter(
+                new Filesystem($adapter, $config),
+                $adapter,
+                $config,
+                $client
+            );
+
         });
     }
 }
